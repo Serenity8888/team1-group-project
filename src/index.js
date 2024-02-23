@@ -1,5 +1,9 @@
 import { IMAGE_URL } from './movies-api';
-import { getTrendingMovies, getMovieGenres, getSearchByQuery } from './movieController';
+import {
+  getTrendingMovies,
+  getMovieGenres,
+  getSearchByQuery,
+} from './movieController';
 import { getMovieDetails } from './movieModal';
 import {
   refreshPagination,
@@ -46,14 +50,18 @@ getTrendingMovies('week').then(response => {
   });
   movieList.innerHTML = movies;
 
-  refreshPagination(data, paginationContainer, gSelectedPage);
+  refreshPagination(
+    response.data.total_pages,
+    paginationContainer,
+    gSelectedPage
+  );
 });
 
 // Select the form and input field
 var searchForm = document.querySelector('.search-form');
 var searchQuery = document.querySelector('#searchQuery');
 
-searchForm.addEventListener('submit', async function(event) {
+searchForm.addEventListener('submit', async function (event) {
   event.preventDefault(); // Prevent default form submission behavior
 
   var query = searchQuery.value;
@@ -74,12 +82,16 @@ searchForm.addEventListener('submit', async function(event) {
 
       movies += `
         <li class='movie-details' data-movie-id="${movie.id}">
-          <img src="${IMAGE_URL}${movie.poster_path}" alt="${movie.title}" class="card-img" />
+          <img src="${IMAGE_URL}${movie.poster_path}" alt="${
+        movie.title
+      }" class="card-img" />
           <div class="movie-info">
             <h3 class="movie-title">${movie.title}</h3>
             <span class="movie-meta">
               <span class="movie-genre">${genreNames.join(', ')}</span> |
-              <span class="movie-release-date">${new Date(movie.release_date).getFullYear()}</span>
+              <span class="movie-release-date">${new Date(
+                movie.release_date
+              ).getFullYear()}</span>
             </span>
           </div>
         </li>
@@ -93,7 +105,6 @@ searchForm.addEventListener('submit', async function(event) {
     // Handle errors (e.g., display error message to the user)
   }
 });
-
 
 // MODAL FUNCTION START
 const closeModal = document.querySelector('.modal-close-btn');

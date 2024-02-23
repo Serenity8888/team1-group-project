@@ -7,6 +7,7 @@ const movieList = document.querySelector('#movies-list');
 
 export let gSelectedPage = 1;
 let gItemsPerPage = 20;
+let gTotalPages = 0;
 const paginateChoices = 5; // pages to show before cutting
 let testItems = Array.from(movieList.getElementsByTagName('li'));
 
@@ -16,9 +17,10 @@ let testItems = Array.from(movieList.getElementsByTagName('li'));
 // Functions
 // ###############################################################
 
-export function refreshPagination(data, pagination, pageSelected) {
+export function refreshPagination(totalPages, pagination, pageSelected) {
+  gTotalPages = totalPages;
+  console.log(`gTotalPages is: `, gTotalPages, `selected page: `, pageSelected);
   let pagesToDisplay = [];
-  const totalPages = Math.ceil(data.length / gItemsPerPage);
   const paginateGroup = Math.ceil(pageSelected / paginateChoices);
   let pageDots = 1;
 
@@ -118,19 +120,6 @@ function clickedPage(event) {
   }
 
   // RENDER movie cards
-}
 
-function showResults(data, resultContainer, gItemsPerPage, pageSelected) {
-  resultContainer.innerHTML = '';
-
-  const dataToShow = data.slice(
-    (pageSelected - 1) * gItemsPerPage,
-    (pageSelected - 1) * gItemsPerPage + gItemsPerPage
-  );
-
-  for (let i = 0; i < dataToShow.length; i++) {
-    resultContainer.appendChild(dataToShow[i]);
-  }
-
-  refreshPagination(testItems, paginationContainer, gSelectedPage);
+  refreshPagination(gTotalPages, paginationContainer, gSelectedPage);
 }
