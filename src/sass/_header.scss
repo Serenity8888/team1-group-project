@@ -14,7 +14,6 @@
 
 .nav-bar {
   width: 100%;
-
   display: flex;
   position: relative;
   justify-content: space-between;
@@ -51,7 +50,6 @@
   }
 }
 
-
 .logo-text {
   font-size: 30px;
   font-weight: 500;
@@ -63,8 +61,6 @@
 .logo-container > a{
   text-decoration: none;
 }
-
-
 
 .form-control-container {
   display: flex;
@@ -101,10 +97,8 @@
   }
 }
 
-
-
 .search-button {
-  width: 40px;
+  width: 20px;
   padding: 0;
   margin: 0;
   border: 1px solid transparent;
