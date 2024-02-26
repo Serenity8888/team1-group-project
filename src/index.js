@@ -92,6 +92,7 @@ var watchedMoviesList = document.querySelector('#watched-movies');
 var queueMoviesList = document.querySelector('#queue-movies');
 
 tabLibrary.addEventListener('click', () => {
+  updateUserInfoFromFirebase();
   tabLibrary.classList.remove('hide');
   // toggle active class for tabLinks
   tabLinks.forEach(tabLink => {
@@ -332,4 +333,32 @@ tabAuth.addEventListener('click', () => {
   authModal.style.display = 'flex';
   loginModal.style.display = 'flex';
   registerModal.style.display = 'none';
+});
+
+// FUNCTION FOR MY LIBRARY
+// FUNCTION FOR MY LIBRARY
+// FUNCTION FOR MY LIBRARY
+
+async function getDetailsForWatchedMovies() {
+  const userDataLibrary = JSON.parse(sessionStorage.getItem('user-info'));
+
+  if (userDataLibrary && userDataLibrary.MovieIDToWatched) {
+    const watchedMovieIds = userDataLibrary.MovieIDToWatched;
+    for (const watchedID of watchedMovieIds) {
+      try {
+        const movieDetailsResponse = await GetMovieDetails(watchedID);
+        const movieDetails = movieDetailsResponse.data;
+        console.log(`ID ${watchedID}:`, movieDetails);
+      } catch (error) {
+        console.error(`Error fetching details for Movie ID ${movieId}:`, error);
+      }
+    }
+  }
+  // watched-movies-list (list)
+}
+
+const watchedBtn = document.getElementById('watchedBtn');
+watchedBtn.addEventListener('click', function () {
+  console.log('Button clicked!');
+  getDetailsForWatchedMovies();
 });
