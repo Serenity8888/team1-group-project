@@ -362,3 +362,27 @@ watchedBtn.addEventListener('click', function () {
   console.log('Button clicked!');
   getDetailsForWatchedMovies();
 });
+
+async function getDetailsForQueueMovies() {
+  const userDataLibrary = JSON.parse(sessionStorage.getItem('user-info'));
+
+  if (userDataLibrary && userDataLibrary.MovieIDToQueue) {
+    const watchedMovieIds = userDataLibrary.MovieIDToQueue;
+    for (const watchedID of watchedMovieIds) {
+      try {
+        const movieDetailsResponse = await GetMovieDetails(watchedID);
+        const movieDetails = movieDetailsResponse.data;
+        console.log(`ID ${watchedID}:`, movieDetails);
+      } catch (error) {
+        console.error(`Error fetching details for Movie ID ${movieId}:`, error);
+      }
+    }
+  }
+  // queue-movies-list (list)
+}
+
+const queueBtn = document.getElementById('queueBtn');
+queueBtn.addEventListener('click', function () {
+  console.log('Button clicked!');
+  getDetailsForQueueMovies();
+});
