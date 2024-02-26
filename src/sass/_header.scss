@@ -66,6 +66,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   padding-top: 5px;
   padding-bottom: 70px;
   position: relative;
@@ -178,7 +179,6 @@
     border-bottom: 1px solid var(--main-white);
   }
 }
-
 
 .tab-form {
   position: relative;
